@@ -1,0 +1,6 @@
+*.o
+genProj
+.cproject
+.project
+*~
+~*
