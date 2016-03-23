@@ -32,7 +32,12 @@ public:
 	{}
     ~cppTemplate() {}
 private:
-    void Process();
+    void genMakefile(std::string &fmakefile,const std::string projname);
+	void genHeader(std::string &fheader);
+	void genClass(std::string &fclass, const std::string classname);
+	void genFunction(std::string &ffunc,const std::string funcname);
+	void genMain(std::string &fmain,const std::string callclass);
+	void Process();
 };
 
 #endif
