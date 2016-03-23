@@ -1,7 +1,6 @@
 cc=g++
 cflags= -Wall -O -std=c++11
-cflags+=-DDEBUG
-exe=genProj
+exe=genproj
 objs=main.o \
 	ctemplate.o \
 

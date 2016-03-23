@@ -48,17 +48,17 @@ public:
     {}
     void createDir()
     {
-//    	if(access(dirname, 0)!=0){
-//    		printf("file exist!\n");
-//    		exit(-2);
-//    	}
-//    	else{
+    	if(access(dirname, 0)==0){
+    		printf("directory: %s exist!\n",dirname);
+    		exit(-2);
+    	}
+    	else{
     		if(mkdir(dirname, 0755))
     		{
     			printf("create file failed!\n");
     			exit(-2);
     		}
- //   	}
+    	}
     }
     void append(const std::string name, const std::string content)
 	{
@@ -72,7 +72,6 @@ public:
 	void flush()
 	{
 		int filesize = filename.size();
-		printf("filesize = %d\n",filesize);
 		for(int i=0;i<filesize;i++)
 		{
 			std::string currentfile = dirname;
