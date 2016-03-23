@@ -92,10 +92,11 @@ public:
         Process();
     }
 
-
+protected:
+    const char* dirname;
 
 private:
-    const char* dirname;
+
 	std::vector<std::string> filename;
 	std::vector<std::string> filecontent;
     virtual void Process() = 0;

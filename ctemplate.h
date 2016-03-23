@@ -14,6 +14,10 @@ public:
 	{}
     ~cTemplate() {}
 private:
+    void genMakefile(std::string &fmakefile,const std::string projname);
+    void genHeader(std::string &fheader);
+    void genFunction(std::string &ffunc,const std::string funcname);
+    void genMain(std::string &fmain,const std::string callfunc);
     void Process();
 };
 
