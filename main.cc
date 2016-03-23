@@ -9,31 +9,33 @@ void Usage(char* str)
    printf("Usages:\n\t%s -l language -d dir [-m comment]\n",str);
 }
 
-int getOps(Typeinfo &t, int argc, char* argv[]);
+void getOps(Typeinfo &t, int argc, char* argv[]);
 
 int main(int argc, char *argv[])
 {
     Typeinfo t;
-    if(argc<3)
-    {
+    if(argc<3){
         Usage(argv[0]);
         return -1;
     }
     else{
-    	if(getOps(t, argc, argv)!=0)
+    	getOps(t, argc, argv);
+        if((t.mode&0x03)!=0x03){
+            Usage(argv[0]);
     		return -1;
+        }
     }
     ITemplate *generator; 
     if(0==strcmp(t.type,"c"))
     {
-    	if(t.mode&0x07)
+    	if(t.mode&1<<2)
     		generator = new cTemplate(t.name, t.comment);
     	else
     		generator = new cTemplate(t.name);
     }
     else
     {
-    	if(t.mode&0x07)
+    	if(t.mode&1<<2)
 			generator = new cppTemplate(t.name, t.comment);
 		else
 			generator = new cppTemplate(t.name);
@@ -44,7 +46,7 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-int getOps(Typeinfo &t, int argc, char* argv[])
+void getOps(Typeinfo &t, int argc, char* argv[])
 {
     char opt=0;
     t.mode=0;
@@ -68,10 +70,8 @@ int getOps(Typeinfo &t, int argc, char* argv[])
             case 'h':
             case '?':
                 Usage(argv[0]);
-                return -1;
                 break;
         }
     }
-    return 0;
 
 }
