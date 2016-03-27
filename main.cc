@@ -6,7 +6,8 @@
 
 void Usage(char* str)
 {
-   printf("Usages:\n\t%s -l language -d dir [-m comment]\n",str);
+    printf("genproj is used to generate a code template!\n");
+    printf("Usages:\n\t%s -l language -d dir [-m comment]\n",str);
 }
 
 void getOps(Typeinfo &t, int argc, char* argv[]);

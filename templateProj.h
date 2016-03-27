@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <cstdio>
+#include <cstdlib>
 #include <fstream>
 
 typedef struct info{
@@ -75,7 +76,7 @@ public:
 			currentfile+=filename[i];
 
 			std::ofstream fileout;
-			fileout.open(currentfile,std::ios::out|std::ios::trunc);
+			fileout.open(currentfile, std::ios::out | std::ios::trunc);
 			if(fileout.is_open())
 			{
 				fileout<<filecontent[i];
