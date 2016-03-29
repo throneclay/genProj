@@ -1,8 +1,10 @@
 #include <iostream>
 #include <cstring>
 #include <cstdio>
+
 #include "templateProj.h"
 #include "ctemplate.h"
+
 
 void Usage(char* str)
 {
