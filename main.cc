@@ -9,7 +9,7 @@
 void Usage(char* str)
 {
     printf("genproj is used to generate a code template!\n");
-    printf("Usages:\n\t%s -l language -d dir [-m comment]\n",str);
+    printf("Usages:\n\t%s -t language -p projectName [-m comment]\n",str);
 }
 
 void getOps(Typeinfo &t, int argc, char* argv[]);
@@ -53,14 +53,14 @@ void getOps(Typeinfo &t, int argc, char* argv[])
 {
     char opt=0;
     t.mode=0;
-    while((opt = getopt(argc, argv,"l:d:m:h")) != -1){
+    while((opt = getopt(argc, argv,"t:p:m:h")) != -1){
         switch(opt){
-            case 'l':
+            case 't':
             	t.mode|=1;
                 strcpy(t.type, optarg);
                 //printf("mode=%d\tI get the type %s\n",t.mode,t.type);
                 break;
-            case 'd':
+            case 'p':
             	t.mode|=1<<1;
                 strcpy(t.name, optarg);
                 //printf("mode=%d\tI got the name %s\n",t.mode,t.name);
