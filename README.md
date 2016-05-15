@@ -17,15 +17,15 @@
 
 clone此版本库后，可以直接make，生成genProj
 
-如果你有root权限，可以sudo make install，会在你的/usr/bin下放一个本文件的副本，卸载输入sudo make uninstall
+**安装** 如果你有root权限，可以sudo make install，会在你的/usr/bin下放一个本文件的副本，卸载输入sudo make uninstall
 
 ## 参数说明：
 
 使用了getopt来获得参数，参数说明如下：
 
--l language 指定生成的语言，例如 -l c 或 -l c++
+-t language 指定生成的语言，例如 -t c 或 -t c++
 
--d directory 指定生成的目录，就是project的名字，-d proj1会在当前目录创建proj1文件夹，并在该文件夹下放置模板，这个名字同时也是Makefile生成的二进制文件的名字。
+-p directory 指定生成的目录，就是project的名字，-p proj1会在当前目录创建proj1文件夹，并在该文件夹下放置模板，这个名字同时也是Makefile生成的二进制文件的名字。
 
 -m comment 指定comment内容，并把内容放在创建的目录下的README文件中
 
