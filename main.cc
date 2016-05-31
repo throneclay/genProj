@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 
 void getOps(Typeinfo &t, int argc, char* argv[])
 {
-    char opt=0;
+    int opt=0;
     t.mode=0;
     while((opt = getopt(argc, argv,"t:p:m:h")) != -1){
         switch(opt){

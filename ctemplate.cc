@@ -10,7 +10,7 @@ void cTemplate::genMakefile(string &fmakefile,const string projname)
 	comment+="\n";
 	string content = R"(
 cc=gcc
-cflags = -Wall -O
+cflags = -Wall -O -std=c99
 objs = main.o
 exe = )";
 	content += projname;
