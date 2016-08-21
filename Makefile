@@ -1,7 +1,7 @@
 cc=g++
 cflags= -Wall -O -std=c++11
 exe=genproj
-binpath=/usr/bin/
+binpath=/usr/local/bin/
 objs=main.o \
 	ctemplate.o \
 
