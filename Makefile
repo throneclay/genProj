@@ -1,6 +1,7 @@
 cc=g++
 cflags= -Wall -O -std=c++11
 exe=genproj
+binpath=/usr/bin/
 objs=main.o \
 	ctemplate.o \
 
@@ -18,7 +19,7 @@ run: $(exe)
 	./$(exe)
 
 install: $(exe)
-	cp $(exe) /usr/bin
+	cp $(exe) $(binpath)
 
 clean:
 	rm -f *.o $(exe)
