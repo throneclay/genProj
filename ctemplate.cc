@@ -11,7 +11,7 @@ void cTemplate::genMakefile(string &fmakefile,const string projname)
 	string content = R"(
 cc=gcc
 cflags = -Wall -O -std=c99
-objs = main.o
+objs=$(patsubst %.c,%.o,$(wildcard *.c))
 exe = )";
 	content += projname;
 	content += R"(
@@ -113,9 +113,7 @@ void cppTemplate::genMakefile(string &fmakefile,const string projname)
 	comment += "\n";
 	string cc="cc=g++\n";
 	string cflags="cflags=-Wall -O\n";
-	//string libflags;
-	//string includeflags;
-	string obj="objs=main.o\n";
+	string obj="objs=$(patsubst %.cc,%.o,$(wildcard *.cc))\n";
 	string exe="exe=";
 	exe+=projname;
 	exe+="\n\n";
