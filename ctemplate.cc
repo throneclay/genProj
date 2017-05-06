@@ -12,6 +12,7 @@ void cTemplate::genMakefile(string &fmakefile,const string projname)
 cc=gcc
 cflags = -Wall -O -std=c99
 objs=$(patsubst %.c,%.o,$(wildcard *.c))
+flags = 
 exe = )";
 	content += projname;
 	content += R"(
@@ -20,10 +21,10 @@ all: bin
 bin: $(exe)
 
 .c.o: 
-	$(cc) $(cflags) -c $< -o $@
+	$(cc) $(cflags) -c $< -o $@ $(flags)
 
 $(exe): $(objs)
-	$(cc) $(cflags) -o $@ $(objs)
+	$(cc) $(cflags) -o $@ $(objs) $(flags)
 
 run: $(exe)
 	./$(exe)
