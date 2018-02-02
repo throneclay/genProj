@@ -12,7 +12,9 @@ void cTemplate::genMakefile(string &fmakefile,const string projname)
 cc=gcc
 cflags = -Wall -O -std=c99
 objs=$(patsubst %.c,%.o,$(wildcard *.c))
-flags = 
+incs=-I.
+lib_path=-L.
+libs=
 exe = )";
 	content += projname;
 	content += R"(
@@ -21,10 +23,10 @@ all: bin
 bin: $(exe)
 
 .c.o: 
-	$(cc) $(cflags) -c $< -o $@ $(flags)
+	$(cc) $(cflags) -c $< -o $@ $(incs)
 
 $(exe): $(objs)
-	$(cc) $(cflags) -o $@ $(objs) $(flags)
+	$(cc) $(cflags) -o $@ $(objs) $(lib_path) $(libs)
 
 run: $(exe)
 	./$(exe)
@@ -113,15 +115,15 @@ void cppTemplate::genMakefile(string &fmakefile,const string projname)
 	comment += timeInfo;
 	comment += "\n";
 	string cc="cc=g++\n";
-	string cflags="cflags=-Wall -O\n";
+	string cflags="cflags=-Wall -O\nincs=-I.\nlib_path=-L.\nlibs=\n";
 	string obj="objs=$(patsubst %.cc,%.o,$(wildcard *.cc))\n";
 	string exe="exe=";
 	exe+=projname;
 	exe+="\n\n";
 
 	string bin="all: bin\nbin: $(exe)\n\n";
-	string compile=".cc.o:\n\t$(cc) $(cflags) -c $< -o $@\n\n";
-	string link="$(exe):$(objs)\n\t$(cc) $(cflags) -o $@ $(objs)\n\nrun: $(exe)\n\t./$(exe)\n\n";
+	string compile=".cc.o:\n\t$(cc) $(cflags) -c $< -o $@ $(incs)\n\n";
+	string link="$(exe):$(objs)\n\t$(cc) $(cflags) -o $@ $(objs) $(lib_path) $(libs)\n\nrun: $(exe)\n\t./$(exe)\n\n";
 	string clean="clean:\n\trm -f *.o $(exe)\n";
 
 	fmakefile=comment + cc + cflags + \
