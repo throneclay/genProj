@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <cstring>
 #include <cstdio>
@@ -6,70 +7,63 @@
 #include "ctemplate.h"
 
 
-void Usage(char* str)
-{
+void Usage(char *str) {
     printf("genproj is used to generate a code template!\n");
-    printf("Usages:\n\t%s -t language -p projectName [-m comment]\n",str);
+    printf("Usages:\n\t%s -t language -p projectName [-m comment]\n", str);
 }
 
-void getOps(Typeinfo &t, int argc, char* argv[]);
+void getOps(Typeinfo &t, int argc, char *argv[]);
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     Typeinfo t;
-    if(argc<3){
+    if (argc < 3) {
         Usage(argv[0]);
         return -1;
-    }
-    else{
-    	getOps(t, argc, argv);
-        if((t.mode&0x03)!=0x03){
+    } else {
+        getOps(t, argc, argv);
+        if ((t.mode & 0x03) != 0x03) {
             Usage(argv[0]);
-    		return -1;
+            return -1;
         }
     }
-    ITemplate *generator; 
-    if(0==strcmp(t.type,"c"))
-    {
-    	if(t.mode&1<<2)
-    		generator = new cTemplate(t.name, t.comment);
-    	else
-    		generator = new cTemplate(t.name);
+    ITemplate *generator;
+    if (0 == strcmp(t.type, "c")) {
+        if (t.mode & 1 << 2)
+            generator = new cTemplate(t.name, t.comment);
+        else
+            generator = new cTemplate(t.name);
+    } else {
+        if (t.mode & 1 << 2)
+            generator = new cppTemplate(t.name, t.comment);
+        else
+            generator = new cppTemplate(t.name);
     }
-    else
-    {
-    	if(t.mode&1<<2)
-			generator = new cppTemplate(t.name, t.comment);
-		else
-			generator = new cppTemplate(t.name);
-    }
-   (*generator)();
+    (*generator)();
 
     delete generator;
     return 0;
 }
 
-void getOps(Typeinfo &t, int argc, char* argv[])
-{
-    int opt=0;
-    t.mode=0;
-    while((opt = getopt(argc, argv,"t:p:m:h")) != -1){
-        switch(opt){
+void getOps(Typeinfo &t, int argc, char *argv[]) {
+    int opt = 0;
+    t.mode = 0;
+    while ((opt = getopt(argc, argv, "t:p:m:h")) != -1) {
+        switch (opt) {
             case 't':
-            	t.mode|=1;
+                t.mode |= 1;
                 strcpy(t.type, optarg);
                 //printf("mode=%d\tI get the type %s\n",t.mode,t.type);
                 break;
             case 'p':
-            	t.mode|=1<<1;
+                t.mode |= 1 << 1;
                 strcpy(t.name, optarg);
                 //printf("mode=%d\tI got the name %s\n",t.mode,t.name);
                 break;
             case 'm':
-            	t.mode|=1<<2;
-            	strcpy(t.comment, optarg);
+                t.mode |= 1 << 2;
+                strcpy(t.comment, optarg);
                 //printf("mode = %d\tI got the comment %s\n",t.mode,t.name);
-            	break;
+                break;
             case 'h':
             case '?':
                 Usage(argv[0]);
