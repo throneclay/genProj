@@ -22,16 +22,16 @@ all: bin
 bin: $(exe)
 
 .c.o: 
-    $(cc) $(cflags) -c $< -o $@ $(incs)
+	$(cc) $(cflags) -c $< -o $@ $(incs)
 
 $(exe): $(objs)
-    $(cc) $(cflags) -o $@ $(objs) $(lib_path) $(libs)
+	$(cc) $(cflags) -o $@ $(objs) $(lib_path) $(libs)
 
 run: $(exe)
-    ./$(exe)
+	./$(exe)
 
 clean:
-    rm -f *.o $(exe)
+	rm -f *.o $(exe)
 )";
 
     fmakefile = comment + content;
@@ -81,15 +81,15 @@ double second()
 
     string ret = "void ";
     string para = "(void)\n";
-    string body = "{\n\tprintf(\"hello, world!\\n\");\n}\n\n";
+    string body = "{\n    printf(\"hello, world!\\n\");\n}\n\n";
     ffunc += ret + funcname + para + body;
 }
 
 void cTemplate::genMain(string &fmain, const string callfunc) {
-    fmain = "int main(int argc, char* argv[])\n{\n\t";
+    fmain = "int main(int argc, char* argv[])\n{\n    ";
     fmain += callfunc;
     fmain += "();\n";
-    fmain += "\treturn 0;\n}";
+    fmain += "    return 0;\n}";
 }
 
 void cTemplate::Process() {
@@ -140,14 +140,14 @@ void cppTemplate::genHeader(string &fheader) {
 void cppTemplate::genFunction(string &ffunc, const string funcname) {
     string ret = "void ";
     string para = "(void)\n";
-    string body = "{\n\tcout<<\"hello, world!\"<<endl;\n}\n\n";
+    string body = "{\n    cout<<\"hello, world!\"<<endl;\n}\n\n";
     ffunc = ret + funcname + para + body;
 }
 
 void cppTemplate::genClass(std::string &fclass, const std::string classname) {
     string head = "class " + classname + "{\npublic:\n";
-    string constructorfunc = "\t" + classname + "()\n\t{}\n\n";
-    string destructorfunc = "\t~" + classname + "()\n\t{}\n\n";
+    string constructorfunc = "    " + classname + "()\n    {}\n\n";
+    string destructorfunc = "    ~" + classname + "()\n    {}\n\n";
     string ffunc;
     genFunction(ffunc, classname + "func");
     string end = "private:\n\n};\n";
@@ -155,11 +155,11 @@ void cppTemplate::genClass(std::string &fclass, const std::string classname) {
 }
 
 void cppTemplate::genMain(string &fmain, const string callclass) {
-    fmain = "int main(int argc, char* argv[])\n{\n\t";
+    fmain = "int main(int argc, char* argv[])\n{\n    ";
     fmain += callclass;
-    fmain += " t;\n\tt.";
+    fmain += " t;\n    t.";
     fmain += callclass + "func();\n";
-    fmain += "\treturn 0;\n}";
+    fmain += "    return 0;\n}";
 }
 
 void cppTemplate::Process() {
