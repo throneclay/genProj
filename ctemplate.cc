@@ -9,7 +9,7 @@ void cTemplate::genMakefile(string &fmakefile, const string projname) {
     comment += "\n";
     string content = R"(
 cc=gcc
-cflags = -Wall -O -std=c99
+cflags=
 objs=$(patsubst %.c,%.o,$(wildcard *.c))
 incs=-I.
 lib_path=-L.
@@ -113,7 +113,7 @@ void cppTemplate::genMakefile(string &fmakefile, const string projname) {
     comment += timeInfo;
     comment += "\n";
     string cc = "cc=g++\n";
-    string cflags = "cflags=-Wall -O\nincs=-I.\nlib_path=-L.\nlibs=\n";
+    string cflags = "cflags=\nincs=-I.\nlib_path=-L.\nlibs=\n";
     string obj = "objs=$(patsubst %.cc,%.o,$(wildcard *.cc))\n";
     string exe = "exe=";
     exe += projname;
